@@ -1,10 +1,11 @@
+import { DailyTask as DailyTaskType } from "../Types/types"
 import DailyTask from "./DailyTask"
 
 export default function DailyList({
   daily,
   showCheckBox = true,
 }: {
-  daily: Array<any>
+  daily: Array<DailyTaskType>
   showCheckBox?: boolean
 }) {
   return (

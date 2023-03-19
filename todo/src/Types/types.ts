@@ -4,12 +4,25 @@ type Task = {
   description: string
   deadline: Date
   isCompleted: boolean
+  author_id: number
 }
 
-type Dailyask = {
+type DailyTask = {
   id: number
   name: string
   isCompleted: boolean
+  author_id: number
 }
 
-export type { Task, Dailyask }
+type Author = {
+  id: number
+  username: string
+  first: string
+  last: string
+}
+
+type Option = {
+  name: string
+}
+
+export type { Task, DailyTask, Author, Option }

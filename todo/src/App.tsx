@@ -17,7 +17,7 @@ export default function App() {
         <ProfileBar />
         <div className="py-5 px-12 w-full h-full">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
             <Route path="Calendar" element={<Calendar />} />
             <Route path="Daily" element={<Daily daily={daily} />} />
             <Route path="Tasks" element={<Tasks />} />

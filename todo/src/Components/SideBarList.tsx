@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom"
+import { DailyTask, Option, Task } from "../Types/types"
 
 export default function SideBarList({
   list,
   title,
   horizontal = false,
 }: {
-  list: Array<any>
+  list: Array<Task | DailyTask | Option>
   title?: string
   horizontal?: boolean
 }) {
@@ -18,16 +19,12 @@ export default function SideBarList({
           {title}
         </div>
       )}
-      {list.map((x: any, i) => {
+      {list.map((x, i) => {
         return (
           <div
             key={i}
             className="my-1 mx-3 text-m hover:font-bold"
-            onClick={
-              x.link
-                ? () => navigate(`${x.link}`)
-                : () => console.log("no link")
-            }
+            onClick={() => navigate(`${x.name}`)}
           >
             {x.name}
           </div>

@@ -10,7 +10,7 @@ export default function Home() {
         title="Daily left to do"
         content={
           <DailyList
-            daily={daily.filter((x) => x.isCompleted).filter((_, i) => i < 3)}
+            daily={daily.filter((x) => !x.isCompleted).filter((_, i) => i < 3)}
             showCheckBox={false}
           />
         }

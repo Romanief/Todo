@@ -1,7 +1,8 @@
 import DailyList from "../Components/DailyList"
 import Cube from "../Components/Cube"
+import { DailyTask } from "../Types/types"
 
-export default function Daily({ daily }: { daily: Array<any> }) {
+export default function Daily({ daily }: { daily: Array<DailyTask> }) {
   return (
     <div className="text-lg my-3 h-4/5 flex w-full justify-between">
       <DailyList daily={daily} />
@@ -16,23 +17,23 @@ export default function Daily({ daily }: { daily: Array<any> }) {
 
         {/* Number of tasks completed on side */}
         <div className="text-3xl w-full text-center mx-10 my-3 h-full rounde py-10 px-10 border-t border-slate-100 ">
-          Task completed: {daily.filter((x) => x.isCompleted == false).length} /{" "}
+          Task completed: {daily.filter((x) => x.isCompleted).length} /{" "}
           {daily.length}
           {/* Shows task completed as a graph */}
           <div className="flex justify-center mt-5">
             {daily
-              .filter((x) => x.isCompleted == false)
-              .map((x, i) => {
-                return <Cube size={10} key={i} completed={x.isCompleted} />
-              })}
-            {daily
               .filter((x) => x.isCompleted)
               .map((x, i) => {
-                return <Cube size={10} key={i} completed={x.isCompleted} />
+                return <Cube size={10} key={i} completed={true} />
+              })}
+            {daily
+              .filter((x) => x.isCompleted == false)
+              .map((x, i) => {
+                return <Cube size={10} key={i} completed={false} />
               })}
           </div>
           {/* Show message if all tasks are completed */}
-          {daily.filter((x) => x.isCompleted).length == 0 && (
+          {daily.filter((x) => !x.isCompleted).length == 0 && (
             <div className="text-lg my-3">Well Done!</div>
           )}
         </div>

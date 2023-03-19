@@ -1,44 +1,39 @@
 const myElem = [
-  { name: "Home", pathing: "Home", link: "/" },
-  { name: "Daily", pathing: "Daily", link: "/daily" },
-  { name: "Tasks", pathing: "Tasks", link: "tasks" },
-  { name: "Calendar", pathing: "Calendar", link: "/calendar" },
+  { name: "Home" },
+  { name: "Tasks" },
+  { name: "Daily" },
+  { name: "Calendar" },
 ]
 
 const tasks = [
   {
-    name: "Grocery",
+    id: 1,
+    name: "TaskName",
+    description: "Task description example blablablah",
     deadline: new Date(),
     isCompleted: false,
-    link: "tasks/grocery",
-  },
-  {
-    name: "Cleaning",
-    deadline: new Date(),
-    isCompleted: true,
-    link: "tasks/cleaning",
-  },
-  {
-    name: "TodoApp",
-    deadline: new Date(),
-    isCompleted: false,
-    link: "tasks/todoApp",
+    author_id: 1,
   },
 ]
 
 const favs = [
-  { name: "I have no idea" },
-  { name: "of what to put" },
-  { name: " here :C" },
+  {
+    id: 1,
+    name: "TaskName",
+    description: "Task description example blablablah",
+    deadline: new Date(),
+    isCompleted: false,
+    author_id: 1,
+  },
 ]
 
 const daily = [
-  { name: "Exercise", link: "daily/exercise", isCompleted: true },
-  { name: "Shower", link: "daily/shower", isCompleted: false },
-  { name: "Study", link: "daily/study", isCompleted: true },
-  { name: "task1", link: "daily/exercise", isCompleted: true },
-  { name: "task2", link: "daily/e3xercise", isCompleted: true },
-  { name: "task3", link: "daily/exercise", isCompleted: false },
+  {
+    id: 2,
+    name: "DailyTaskName",
+    isCompleted: false,
+    author_id: 1,
+  },
 ]
 
 const options = [

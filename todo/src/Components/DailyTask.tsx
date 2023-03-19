@@ -1,11 +1,12 @@
 import { useState } from "react"
+import { DailyTask } from "../Types/types"
 
 export default function ({
   showCheckBox,
   x,
 }: {
   showCheckBox: boolean
-  x: any
+  x: DailyTask
 }) {
   const [isCompleted, setIsCompleted] = useState(x.isCompleted)
 
@@ -21,8 +22,8 @@ export default function ({
         <div
           className={
             isCompleted
-              ? "w-3 h-3 border-2 rounded-full my-auto bg-white"
-              : "w-3 h-3 border-2 rounded-full my-auto bg-pink-600"
+              ? "w-3 h-3 border-2 rounded-full my-auto bg-pink-600"
+              : "w-3 h-3 border-2 rounded-full my-auto bg-white"
           }
         ></div>
       )}
