@@ -10,7 +10,7 @@ export default function Home() {
         title="Daily left to do"
         content={
           <DailyList
-            daily={daily.filter((x) => x.isActive).filter((_, i) => i < 3)}
+            daily={daily.filter((x) => x.isCompleted).filter((_, i) => i < 3)}
             showCheckBox={false}
           />
         }
@@ -19,7 +19,7 @@ export default function Home() {
       <HomeComponent
         title="Expiring"
         content={
-          <div className="px-3 w-96">
+          <div className="w-96">
             {tasks.map((x) => (
               <div className="my-3">
                 <Task task={x} h={24} />

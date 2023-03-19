@@ -1,50 +1,50 @@
 const myElem = [
-  { text: "Home", pathing: "Home", link: "/" },
-  { text: "Daily", pathing: "Daily", link: "/daily" },
-  { text: "Tasks", pathing: "Tasks", link: "tasks" },
-  { text: "Calendar", pathing: "Calendar", link: "/calendar" },
+  { name: "Home", pathing: "Home", link: "/" },
+  { name: "Daily", pathing: "Daily", link: "/daily" },
+  { name: "Tasks", pathing: "Tasks", link: "tasks" },
+  { name: "Calendar", pathing: "Calendar", link: "/calendar" },
 ]
 
 const tasks = [
   {
-    text: "Grocery",
-    expire: new Date(),
-    isActive: false,
+    name: "Grocery",
+    deadline: new Date(),
+    isCompleted: false,
     link: "tasks/grocery",
   },
   {
-    text: "Cleaning",
-    expire: new Date(),
-    isActive: true,
+    name: "Cleaning",
+    deadline: new Date(),
+    isCompleted: true,
     link: "tasks/cleaning",
   },
   {
-    text: "TodoApp",
-    expire: new Date(),
-    isActive: false,
+    name: "TodoApp",
+    deadline: new Date(),
+    isCompleted: false,
     link: "tasks/todoApp",
   },
 ]
 
 const favs = [
-  { text: "I have no idea" },
-  { text: "of what to put" },
-  { text: " here :C" },
+  { name: "I have no idea" },
+  { name: "of what to put" },
+  { name: " here :C" },
 ]
 
 const daily = [
-  { text: "Exercise", link: "daily/exercise", isActive: true },
-  { text: "Shower", link: "daily/shower", isActive: false },
-  { text: "Study", link: "daily/study", isActive: true },
-  { text: "task1", link: "daily/exercise", isActive: true },
-  { text: "task2", link: "daily/e3xercise", isActive: true },
-  { text: "task3", link: "daily/exercise", isActive: false },
+  { name: "Exercise", link: "daily/exercise", isCompleted: true },
+  { name: "Shower", link: "daily/shower", isCompleted: false },
+  { name: "Study", link: "daily/study", isCompleted: true },
+  { name: "task1", link: "daily/exercise", isCompleted: true },
+  { name: "task2", link: "daily/e3xercise", isCompleted: true },
+  { name: "task3", link: "daily/exercise", isCompleted: false },
 ]
 
 const options = [
-  { text: "Edit Profile" },
-  { text: "Log Out" },
-  { text: "Invite Friends" },
+  { name: "Edit Profile" },
+  { name: "Log Out" },
+  { name: "Invite Friends" },
 ]
 
 export { myElem, tasks, favs, options, daily }

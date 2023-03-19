@@ -18,9 +18,10 @@ export default function SideBarList({
           {title}
         </div>
       )}
-      {list.map((x: any) => {
+      {list.map((x: any, i) => {
         return (
           <div
+            key={i}
             className="my-1 mx-3 text-m hover:font-bold"
             onClick={
               x.link
@@ -28,7 +29,7 @@ export default function SideBarList({
                 : () => console.log("no link")
             }
           >
-            {x.text}
+            {x.name}
           </div>
         )
       })}
