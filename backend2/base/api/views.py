@@ -42,3 +42,13 @@ def getNotes(request):
   # tasks = Task.objects.all()
   serializer = TaskSerializer(tasks, many=True)
   return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getDailyNotes(request):
+  user = request.user
+  tasks = user.dailytask_set.all()
+  # tasks = Task.objects.all()
+  serializer = TaskSerializer(tasks, many=True)
+  return Response(serializer.data)
