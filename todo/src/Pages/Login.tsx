@@ -28,29 +28,7 @@ export default function Login({
     setPasswordInput("")
   }
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: savedUser,
-        password: savedPassword,
-      }),
-    })
-      .then((data) => {
-        if (data.status == 200) {
-          setLogIn(true)
-          data.json()
-          console.log("Success", data, data.status)
-          console.log("redirected")
-        }
-      })
-      .then((data) => {
-        setUsername(data.username)
-      })
-  }, [savedUser, savedPassword])
+  useEffect(() => {}, [savedUser, savedPassword])
 
   return (
     <div>
@@ -58,14 +36,16 @@ export default function Login({
         <input
           className="rounded-3xl bg-gray-100 hover:bg-pink-100 px-5 py-3 my-3 focus:outline-none"
           type="text"
-          placeholder="Username"
+          name="username"
+          placeholder="Enter Username"
           value={usernameInput}
           onChange={(e) => setUsernameInput(e.target.value)}
         />
         <input
           className="rounded-3xl bg-gray-100 hover:bg-pink-100 px-5 py-3 my-3 focus:outline-none"
           type="text"
-          placeholder="Password"
+          name="password"
+          placeholder="Enter Password"
           value={passwordInput}
           onChange={(e) => setPasswordInput(e.target.value)}
         />

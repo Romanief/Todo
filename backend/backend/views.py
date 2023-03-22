@@ -2,10 +2,11 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Task, DailyTask
-from .serializers import TaskSerializer, DailyTaskSerializer, UserSerializer
+from .serializers import TaskSerializer, DailyTaskSerializer, TokenSerializer, UserSerializer
 
 # Returns all possible routes for the API
 @api_view(['GET'])
@@ -49,7 +50,10 @@ def login_view(request, format=None):
     # If user exists login
     if user is not None:
       login(request, user)
-      return Response(status=status.HTTP_200_OK)
+      print("AAAAAAAAA", user, user.id)
+      token = Token.objects.create(user = user)
+      print("AAAAAA",token)
+      return Response( status=status.HTTP_200_OK)
     
     # Otherwise return error
     else:
