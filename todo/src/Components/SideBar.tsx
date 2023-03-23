@@ -1,7 +1,14 @@
+import { useContext } from "react"
+
 import SideBarList from "./SideBarList"
-import { myElem, tasks, favs } from "../PseudoData/pseudoData"
+import { myElem } from "../PseudoData/pseudoData"
+import { loginContext } from "../Contexts/LoginContext"
+import { taskContext } from "../Contexts/DataContext"
 
 export default function SideBar() {
+  const { user } = useContext(loginContext)
+  const { tasks } = useContext(taskContext)
+
   return (
     <div className="h-screen w-1/5 flex flex-col">
       <img
@@ -10,8 +17,8 @@ export default function SideBar() {
       />
       <div className="rounded-3xl mx-auto w-10/12 h-3/4 bg-gray-100 my-3 p-5">
         <SideBarList list={myElem} />
-        <SideBarList list={tasks} title={"Approaching"} />
-        <SideBarList list={favs} title={"Favourites"} />
+        {user && <SideBarList list={tasks} title={"Approaching"} />}
+        {user && <SideBarList list={tasks} title={"Favourites"} />}
       </div>
     </div>
   )

@@ -1,41 +1,12 @@
-import React, { useState, useEffect } from "react"
+import { useContext } from "react"
 
-import { daily, tasks } from "../PseudoData/pseudoData"
 import Task from "../Components/Task"
 import DailyList from "../Components/DailyList"
 import HomeComponent from "../Components/HomeComponent"
+import { taskContext } from "../Contexts/DataContext"
 
-export default function Home({
-  user,
-  authTokens,
-  logout,
-}: {
-  user: any
-  authTokens: any
-  logout: any
-}) {
-  let [tasks, setTasks] = useState<any>([])
-
-  useEffect(() => {
-    getNotes()
-  }, [])
-
-  let getNotes = async () => {
-    let response = await fetch("http://127.0.0.1:8000/api/tasks/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    })
-    let data = await response.json()
-
-    if (response.status == 200) {
-      setTasks(data)
-    } else if (response.statusText === "Unauthorized") {
-      logout()
-    }
-  }
+export default function Home() {
+  const { tasks } = useContext(taskContext)
 
   return (
     <div className="flex justify-start">
