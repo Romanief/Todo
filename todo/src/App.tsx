@@ -1,11 +1,9 @@
 // External imports
-import { useState } from "react"
 import { Route, Routes } from "react-router-dom"
-import jwt_decode from "jwt-decode"
 
 // Context imports
 import { LoginContext } from "./Contexts/LoginContext"
-import { TaskContext } from "./Contexts/DataContext"
+import { DailyTaskContext, TaskContext } from "./Contexts/DataContext"
 
 // Pages imports
 import Home from "./Pages/Home"
@@ -22,14 +20,6 @@ import ProfileBar from "./Components/ProfileBar"
 import { daily } from "./PseudoData/pseudoData"
 
 export default function App() {
-  // States that needs to be global (TODO: Externalise contexts value and move data somewhere else)
-  // Authorization states:
-  let [authTokens, setAuthTokens] = useState(
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens")!)
-      : null
-  )
-
   // Return
   return (
     // Container
@@ -38,19 +28,21 @@ export default function App() {
 
       <LoginContext>
         <TaskContext>
-          <SideBar />
-          <div className="flex flex-col w-full h-full">
-            <ProfileBar />
-            <div className="py-5 px-12 w-full h-full">
-              <Routes>
-                <Route path="/Home" element={<Home />} />
-                <Route path="Calendar" element={<Calendar />} />
-                <Route path="Daily" element={<Daily daily={daily} />} />
-                <Route path="Tasks" element={<Tasks />} />
-                <Route path="" element={<Trial />} />
-              </Routes>
+          <DailyTaskContext>
+            <SideBar />
+            <div className="flex flex-col w-full h-full">
+              <ProfileBar />
+              <div className="py-5 px-12 w-full h-full">
+                <Routes>
+                  <Route path="/Home" element={<Home />} />
+                  <Route path="Calendar" element={<Calendar />} />
+                  <Route path="Daily" element={<Daily />} />
+                  <Route path="Tasks" element={<Tasks />} />
+                  <Route path="" element={<Trial />} />
+                </Routes>
+              </div>
             </div>
-          </div>
+          </DailyTaskContext>
         </TaskContext>
       </LoginContext>
       {/* </loginContext.Provider> */}

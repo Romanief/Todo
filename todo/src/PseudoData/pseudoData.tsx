@@ -39,7 +39,6 @@ const myElem: Array<Option> = [
   { name: "Home" },
   { name: "Tasks" },
   { name: "Daily" },
-  { name: "Calendar" },
 ]
 
 const loggedInOptions: Array<Option> = [

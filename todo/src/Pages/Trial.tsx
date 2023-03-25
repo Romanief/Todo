@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 import { loginContext } from "../Contexts/LoginContext"
 
-export default function Trials(/*{ logout }: { logout: any }*/) {
+export default function Trials() {
   const { user, login, logout } = useContext(loginContext)
   let [usernameInput, setUsernameInput] = useState("")
   let [passwordInput, setPasswordInput] = useState("")

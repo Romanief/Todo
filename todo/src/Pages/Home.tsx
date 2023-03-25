@@ -3,35 +3,30 @@ import { useContext } from "react"
 import Task from "../Components/Task"
 import DailyList from "../Components/DailyList"
 import HomeComponent from "../Components/HomeComponent"
-import { taskContext } from "../Contexts/DataContext"
+import { dailyTaskContext, taskContext } from "../Contexts/DataContext"
+import { Task as TaskType, DailyTask as DailyTaskType } from "../Types/types"
+import { loginContext } from "../Contexts/LoginContext"
+import Unathorized from "../Components/Unathorized"
 
 export default function Home() {
-  const { tasks } = useContext(taskContext)
+  const { user } = useContext(loginContext)
+  const { tasks }: { tasks: Array<TaskType> } = useContext(taskContext)
+  const { dailyTasks }: { dailyTasks: Array<DailyTaskType> } =
+    useContext(dailyTaskContext)
 
-  return (
+  return user ? (
     <div className="flex justify-start">
-      {tasks && (
-        <ul>
-          {(tasks as Array<any>).map((task) => (
-            <li key={task.id}>{task.name}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
-}
-
-{
-  /* <HomeComponent
+      <HomeComponent
         title="Daily left to do"
         content={
           <DailyList
-            daily={daily.filter((x) => !x.isCompleted).filter((_, i) => i < 3)}
+            daily={dailyTasks
+              .filter((x) => !x.isCompleted)
+              .filter((_, i) => i < 3)}
             showCheckBox={false}
           />
         }
       />
-
       <HomeComponent
         title="Expiring"
         content={
@@ -43,5 +38,9 @@ export default function Home() {
             ))}
           </div>
         }
-      /> */
+      />
+    </div>
+  ) : (
+    <Unathorized />
+  )
 }

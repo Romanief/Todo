@@ -17,7 +17,7 @@ export default function Task({ task, h = 32 }: { task: TaskType; h?: number }) {
     >
       <div className="flex justify-between">
         <div className="font-bold">{task.name}</div>
-        <div>Expires on: {format(task.deadline, "dd/mm")}</div>
+        <div>Expires on: {task.deadline.toString()}</div>
       </div>
       <div className="text-sm my-3">
         <span className="font-bold">Description:</span> {task.description}

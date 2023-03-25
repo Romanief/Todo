@@ -15,11 +15,13 @@ export default function SideBar() {
         className=" w-11/12 rounded mx-auto my-5"
         src={require("../Images/logo.jpeg")}
       />
-      <div className="rounded-3xl mx-auto w-10/12 h-3/4 bg-gray-100 my-3 p-5">
-        <SideBarList list={myElem} />
-        {user && <SideBarList list={tasks} title={"Approaching"} />}
-        {user && <SideBarList list={tasks} title={"Favourites"} />}
-      </div>
+      {user && (
+        <div className="rounded-3xl mx-auto w-10/12 h-3/4 bg-gray-100 my-3 p-5">
+          <SideBarList list={myElem} />
+          {user && <SideBarList list={tasks} title={"Approaching"} />}
+          {user && <SideBarList list={tasks} title={"Favourites"} />}
+        </div>
+      )}
     </div>
   )
 }
