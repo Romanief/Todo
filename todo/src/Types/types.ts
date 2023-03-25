@@ -22,6 +22,7 @@ type Author = {
 }
 
 type Option = {
+  id?: number
   name: string
 }
 

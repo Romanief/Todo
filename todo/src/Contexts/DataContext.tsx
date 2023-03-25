@@ -34,6 +34,7 @@ function TaskContext({ children }: { children: React.ReactNode }) {
 
   const providerValue = {
     tasks,
+    getTasks,
   }
 
   return (
@@ -66,11 +67,12 @@ function DailyTaskContext({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    const timeout = setTimeout(() => getTasks(), 1000)
+    getTasks()
   }, [])
 
   const providerValue = {
     dailyTasks,
+    getTasks,
   }
 
   return (

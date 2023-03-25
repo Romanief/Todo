@@ -10,6 +10,8 @@ export default function Tasks() {
   const { tasks }: { tasks: Array<TaskType> } = useContext(taskContext)
   const { user } = useContext(loginContext)
 
+  tasks.forEach((task) => console.log(task.id))
+
   return user ? (
     <div className="text-xl">
       {tasks.map((x, i) => {

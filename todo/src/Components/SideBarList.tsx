@@ -5,10 +5,12 @@ export default function SideBarList({
   list,
   title,
   horizontal = false,
+  isTaskList = true,
 }: {
   list: Array<Task | DailyTask | Option>
   title?: string
   horizontal?: boolean
+  isTaskList?: boolean
 }) {
   const navigate = useNavigate()
 
@@ -24,7 +26,11 @@ export default function SideBarList({
           <div
             key={i}
             className="my-1 mx-3 text-m hover:font-bold"
-            onClick={() => navigate(`${x.name}`)}
+            onClick={
+              isTaskList
+                ? () => navigate(`tasks/${x.id}`)
+                : () => navigate(`${x.name}`)
+            }
           >
             {x.name}
           </div>
