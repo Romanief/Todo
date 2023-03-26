@@ -16,7 +16,7 @@ export default function SideBar() {
   ]
 
   return user ? (
-    <div className="h-full w-1/5 flex flex-col">
+    <div className="h-full w-1/5 flex flex-col ml-16">
       <div className="rounded-3xl mx-auto w-10/12 h-3/4 bg-gray-100 my-3 p-5">
         <SideBarList list={myElem} isTaskList={false} />
         {user && <SideBarList list={tasks} title={"Approaching"} />}

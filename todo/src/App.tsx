@@ -11,11 +11,12 @@ import Daily from "./Pages/Daily"
 import Calendar from "./Pages/Calendar"
 import Tasks from "./Pages/Tasks"
 import Trial from "./Pages/Trial"
+import NewTaskForm from "./Pages/NewTaskForm"
+import TaskPage from "./Pages/TaskPage"
 
 // Component imports
 import SideBar from "./Components/SideBar"
 import ProfileBar from "./Components/ProfileBar"
-import TaskPage from "./Pages/TaskPage"
 
 export default function App() {
   // Return
@@ -39,6 +40,7 @@ export default function App() {
                     <Route path="Tasks" element={<Tasks />} />
                     <Route path="" element={<Trial />} />
                     <Route path="Tasks/:id" element={<TaskPage />} />
+                    <Route path="Tasks/new" element={<NewTaskForm />} />
                   </Routes>
                 </div>
               </div>

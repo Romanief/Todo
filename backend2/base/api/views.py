@@ -35,13 +35,23 @@ def getRoutes(request):
 
   return Response(routes)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def getNotes(request):
   user = request.user
-  tasks = user.task_set.all()
-  serializer = TaskSerializer(tasks, many=True)
-  return Response(serializer.data)
+
+  if request.method == 'GET':
+    tasks = user.task_set.all()
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
+
+  elif request.method == 'POST':
+    serializer = TaskSerializer(Task, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(data=serializer.data, status=status.HTTP_200_OK)
+    else:
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

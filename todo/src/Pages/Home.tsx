@@ -31,11 +31,17 @@ export default function Home() {
         title="Expiring"
         content={
           <div className="w-96">
-            {tasks.map((x) => (
-              <div className="my-3">
-                <Task task={x} h={24} />
-              </div>
-            ))}
+            {tasks.filter((x) => !x.isCompleted).length > 0 ? (
+              tasks
+                .filter((x) => !x.isCompleted)
+                .map((x) => (
+                  <div className="my-3">
+                    <Task task={x} h={24} />
+                  </div>
+                ))
+            ) : (
+              <div className="p-3">No more tasks to complete!</div>
+            )}
           </div>
         }
       />
