@@ -3,11 +3,11 @@ import { useContext } from "react"
 import SideBarList from "./SideBarList"
 import { loginContext } from "../Contexts/LoginContext"
 import { taskContext } from "../Contexts/DataContext"
-import { Option } from "../Types/types"
+import { Option, Task } from "../Types/types"
 
 export default function SideBar() {
   const { user } = useContext(loginContext)
-  const { tasks } = useContext(taskContext)
+  const { tasks }: { tasks: Array<Task> } = useContext(taskContext)
 
   const myElem: Array<Option> = [
     { name: "Home" },
@@ -17,10 +17,14 @@ export default function SideBar() {
 
   return user ? (
     <div className="h-full w-1/5 flex flex-col ml-16">
-      <div className="rounded-3xl mx-auto w-10/12 h-3/4 bg-gray-100 my-3 p-5">
+      <div className="rounded-3xl mx-auto w-10/12 h-full bg-gray-100 my-3 p-5">
         <SideBarList list={myElem} isTaskList={false} />
-        {user && <SideBarList list={tasks} title={"Approaching"} />}
-        {user && <SideBarList list={tasks} title={"Favourites"} />}
+        {user && (
+          <SideBarList
+            list={tasks.filter((x) => !x.isCompleted).filter((_, i) => i < 7)}
+            title={"Tasks"}
+          />
+        )}
       </div>
     </div>
   ) : null

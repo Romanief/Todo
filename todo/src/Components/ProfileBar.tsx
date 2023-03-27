@@ -17,7 +17,7 @@ export default function ProfileBar() {
           />
         )}
         <div className="my-auto">
-          <Link className="mx-3" to="/">
+          <Link className="mx-3" to="/Register">
             {user ? "" : "Register"}
           </Link>
           <Link className="mx-3" to="/">

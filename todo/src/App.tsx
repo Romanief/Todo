@@ -13,6 +13,7 @@ import Tasks from "./Pages/Tasks"
 import Trial from "./Pages/Trial"
 import NewTaskForm from "./Pages/NewTaskForm"
 import TaskPage from "./Pages/TaskPage"
+import Register from "./Pages/Register"
 
 // Component imports
 import SideBar from "./Components/SideBar"
@@ -41,6 +42,7 @@ export default function App() {
                     <Route path="" element={<Trial />} />
                     <Route path="Tasks/:id" element={<TaskPage />} />
                     <Route path="Tasks/new" element={<NewTaskForm />} />
+                    <Route path="register" element={<Register />} />
                   </Routes>
                 </div>
               </div>

@@ -30,7 +30,7 @@ export default function Home() {
       <HomeComponent
         title="Expiring"
         content={
-          <div className="w-96">
+          <div className="w-full">
             {tasks.filter((x) => !x.isCompleted).length > 0 ? (
               tasks
                 .filter((x) => !x.isCompleted)

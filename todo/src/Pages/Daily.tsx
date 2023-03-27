@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import React, { useContext, useState } from "react"
 
 import DailyList from "../Components/DailyList"
 import Cube from "../Components/Cube"
@@ -9,10 +9,47 @@ import { loginContext } from "../Contexts/LoginContext"
 import Unathorized from "../Components/Unathorized"
 
 export default function Daily() {
-  const { dailyTasks }: { dailyTasks: Array<DailyTask> } =
+  const { user, authTokens, logout } = useContext(loginContext)
+  const {
+    dailyTasks,
+    getTasks,
+  }: { dailyTasks: Array<DailyTask>; getTasks: any } =
     useContext(dailyTaskContext)
 
-  const { user } = useContext(loginContext)
+  const [nameInput, setNameInput] = useState("")
+
+  let createTask = async () => {
+    let response = await fetch("http://127.0.0.1:8000/api/dailytasks/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        name: nameInput,
+      }),
+    })
+    let data = await response.json()
+
+    if (response.status == 200) {
+      console.log(data)
+      setNameInput("")
+      getTasks()
+    } else if (response.statusText === "Unauthorized") {
+      logout()
+    }
+  }
+
+  function handleClick(e: React.MouseEvent) {
+    e.preventDefault()
+    console.log("click")
+    console.log(nameInput)
+
+    if (nameInput) {
+      console.log("accepted")
+      createTask()
+    }
+  }
 
   return user ? (
     <div className="text-lg my-3 h-4/5 flex w-full justify-between">
@@ -20,11 +57,26 @@ export default function Daily() {
 
       <div className="flex flex-col justify-between px-10">
         {/* Quote on side */}
-        <div className="w-full h-full text-5xl rounded mx-3 my-3 py-5 px-10 flex justify-center">
-          <div className="rounded p-5 my-auto text-pink-600 font-bold text-center">
-            "A quote of your choice to motivate you"
+        <form className="flex flex-col text-xl">
+          <div className="text-pink-500 font-extrabold text-3xl text-center mb-5">
+            New Daily task
           </div>
-        </div>
+          <input
+            className="bg-gray-200 rounded-3xl p-5 my-3 hover:bg-pink-100 focus:outline-none focus:bg-pink-200"
+            type="text"
+            placeholder="Insert Name"
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
+          />
+          <input
+            className="bg-gray-100 rounded-3xl p-5 my-3 hover:bg-pink-100 focus:outline-none font-extrabold"
+            type="submit"
+            value="Add Daily Task"
+            onClick={(e) => {
+              handleClick(e)
+            }}
+          />
+        </form>
 
         {/* Number of tasks completed on side */}
         <div className="text-3xl w-full text-center mx-10 my-3 h-full rounde py-10 px-10 border-t border-slate-100 ">

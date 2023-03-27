@@ -1,19 +1,22 @@
+from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import TaskSerializer, DailyTaskSerializer
+from .serializers import TaskSerializer, DailyTaskSerializer, UserSerializer
 from base.models import Task, DailyTask
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
+        print("AAAAA", user, cls)
         token = super().get_token(user)
 
         # Add custom claims
@@ -24,7 +27,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
+  print(TokenObtainPairView.allowed_methods)
   serializer_class = MyTokenObtainPairSerializer
+
+
+@api_view(['POST'])
+def register(request):
+  user = User()
+  serializer = UserSerializer(user, data = request.data)
+  serializer.initial_data["password"] = make_password(serializer.initial_data["password"])
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  else:
+    return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def getRoutes(request): 
@@ -34,6 +51,7 @@ def getRoutes(request):
   ]
 
   return Response(routes)
+
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -46,7 +64,9 @@ def getNotes(request):
     return Response(serializer.data)
 
   elif request.method == 'POST':
-    serializer = TaskSerializer(Task, data=request.data)
+    task = Task()
+    task.user = request.user
+    serializer = TaskSerializer(task, data=request.data)
     if serializer.is_valid():
       serializer.save()
       return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -54,13 +74,25 @@ def getNotes(request):
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def getDailyNotes(request):
   user = request.user
-  tasks = user.dailytask_set.all()
-  serializer = TaskSerializer(tasks, many=True)
-  return Response(serializer.data)
+
+  if request.method == "GET":
+    tasks = user.dailytask_set.all()
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
+
+  elif request.method == 'POST':
+    task = DailyTask()
+    task.user = request.user
+    serializer = DailyTaskSerializer(task, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(data=serializer.data, status=status.HTTP_200_OK)
+    else:
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

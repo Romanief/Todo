@@ -38,7 +38,7 @@ function LoginContext({ children }: { children: React.ReactNode }) {
       setUser(jwt_decode(data.access))
       localStorage.setItem("authTokens", JSON.stringify(data))
     } else {
-      alert("Something went wrong, dumbass")
+      console.log(data)
     }
   }
 

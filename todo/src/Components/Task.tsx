@@ -25,7 +25,7 @@ export default function Task({ task, h = 32 }: { task: TaskType; h?: number }) {
           {task.isCompleted ? (
             <div>Completed</div>
           ) : (
-            <div>Expires on: {task.deadline.toString()}</div>
+            <div className="ml-10">Expires on: {task.deadline.toString()}</div>
           )}
         </div>
         <div className="text-sm my-3">
