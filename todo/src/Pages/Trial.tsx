@@ -45,7 +45,7 @@ export default function Trials() {
           />
           <input
             className="rounded-3xl bg-gray-100 hover:bg-pink-100 px-5 py-3 my-3 focus:outline-none"
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter Password"
             value={passwordInput}

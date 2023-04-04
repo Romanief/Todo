@@ -34,6 +34,7 @@ export default function Home() {
             {tasks.filter((x) => !x.isCompleted).length > 0 ? (
               tasks
                 .filter((x) => !x.isCompleted)
+                .filter((_, i) => i < 3)
                 .map((x) => (
                   <div className="my-3">
                     <Task task={x} h={24} />

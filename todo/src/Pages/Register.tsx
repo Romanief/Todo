@@ -53,7 +53,9 @@ const Register = () => {
           </div>
         </div>
       ) : message ? (
-        <div>{message}</div>
+        <div className="mx-auto my-10 py-10 text-center text-3xl text-pink-500 font font-extrabold">
+          {message}
+        </div>
       ) : (
         <form className="container flex flex-col w-1/3 mx-auto my-10">
           <input
@@ -66,7 +68,7 @@ const Register = () => {
           />
           <input
             className="rounded-3xl bg-gray-100 hover:bg-pink-100 px-5 py-3 my-3 focus:outline-none"
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter Password"
             value={passwordInput}
